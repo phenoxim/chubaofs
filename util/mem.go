@@ -16,8 +16,13 @@ package util
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
+	"github.com/chubaofs/chubaofs/util/log"
+	"net/http"
 	"os"
+	"runtime"
+	"runtime/debug"
 	"strconv"
 	"strings"
 )
@@ -95,4 +100,17 @@ func GetProcessMemory(pid int) (used uint64, err error) {
 		break
 	}
 	return
+}
+
+const (
+	ForceFreeMemory="/freeMemory"
+)
+
+func HandleForceFreeMemory(w http.ResponseWriter, r *http.Request) {
+	var mem runtime.MemStats
+	runtime.ReadMemStats(&mem)
+	data,_:=json.Marshal(mem)
+	w.Write(data)
+	log.LogInfof(fmt.Sprintf("memory info %v",string(data)))
+	debug.FreeOSMemory()
 }

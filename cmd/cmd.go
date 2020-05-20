@@ -17,6 +17,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/chubaofs/chubaofs/util"
 	syslog "log"
 	"net/http"
 	_ "net/http/pprof"
@@ -242,6 +243,7 @@ func main() {
 	if profPort != "" {
 		go func() {
 			http.HandleFunc(log.SetLogLevelPath, log.SetLogLevel)
+			http.HandleFunc(util.ForceFreeMemory,util.HandleForceFreeMemory)
 			e := http.ListenAndServe(fmt.Sprintf(":%v", profPort), nil)
 			if e != nil {
 				log.LogFlush()
