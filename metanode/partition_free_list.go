@@ -40,6 +40,7 @@ func (mp *metaPartition) startFreeList() (err error) {
 		DeleteInodeFileExtension), OpenRWAppendOpt, 0644); err != nil {
 		return
 	}
+	panic("startFreeList")
 
 	// start vol update ticket
 	go mp.updateVolWorker()

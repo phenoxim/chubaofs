@@ -213,7 +213,6 @@ type metaPartition struct {
 
 // Start starts a meta partition.
 func (mp *metaPartition) Start() (err error) {
-	panic("metapartition start painc")
 	if atomic.CompareAndSwapUint32(&mp.state, common.StateStandby, common.StateStart) {
 		defer func() {
 			var newState uint32
@@ -261,6 +260,7 @@ func (mp *metaPartition) onStart() (err error) {
 		}
 		mp.onStop()
 	}()
+	panic("wocao metaPartition painc")
 	if err = mp.load(); err != nil {
 		err = errors.NewErrorf("[onStart]:load partition id=%d: %s",
 			mp.config.PartitionId, err.Error())
