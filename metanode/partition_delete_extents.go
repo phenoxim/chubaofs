@@ -39,6 +39,7 @@ var extentsFileHeader = []byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08}
 
 func (mp *metaPartition) startToDeleteExtents() {
 	fileList := list.New()
+	panic("startToDeleteExtents")
 	go mp.appendDelExtentsToFile(fileList)
 	go mp.deleteExtentsFromList(fileList)
 }
@@ -52,6 +53,7 @@ func (mp *metaPartition) appendDelExtentsToFile(fileList *list.List) {
 		err      error
 	)
 LOOP:
+	panic("appendDelExtentsToFile")
 	finfos, err := ioutil.ReadDir(mp.config.RootDir)
 	if err != nil {
 		panic(err)
@@ -148,6 +150,7 @@ func (mp *metaPartition) deleteExtentsFromList(fileList *list.List) {
 		default:
 		}
 	LOOP:
+		panic("deleteExtentsFromList")
 		element = fileList.Front()
 		if element == nil {
 			continue

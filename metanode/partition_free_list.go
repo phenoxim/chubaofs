@@ -51,6 +51,7 @@ func (mp *metaPartition) startFreeList() (err error) {
 
 func (mp *metaPartition) updateVolWorker() {
 	t := time.NewTicker(UpdateVolTicket)
+	panic("updateVolWorker")
 	var convert = func(view *proto.DataPartitionsView) *DataPartitionsView {
 		newView := &DataPartitionsView{
 			DataPartitions: make([]*DataPartition, len(view.DataPartitions)),
@@ -99,6 +100,7 @@ Begin:
 			return
 		default:
 		}
+		panic("deleteWorker")
 		if _, isLeader = mp.IsLeader(); !isLeader {
 			goto Begin
 		}

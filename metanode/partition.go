@@ -213,6 +213,7 @@ type metaPartition struct {
 
 // Start starts a meta partition.
 func (mp *metaPartition) Start() (err error) {
+	panic("metapartition start painc")
 	if atomic.CompareAndSwapUint32(&mp.state, common.StateStandby, common.StateStart) {
 		defer func() {
 			var newState uint32
