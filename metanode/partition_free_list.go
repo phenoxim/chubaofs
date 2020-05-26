@@ -174,8 +174,8 @@ func (mp *metaPartition) deleteMarkedInodes(inoSlice []uint64) {
 				mp.freeList.Push(inode.Inode)
 			}
 		}
+		log.LogInfof("metaPartition(%v) deleteInodeCnt(%v) inodeCnt(%v)", mp.config.PartitionId,len(shouldCommit),mp.inodeTree.Len())
 	}
-	log.LogInfof("metaPartition(%v) deleteInodeCnt(%v) inodeCnt(%v)", mp.config.PartitionId,len(shouldCommit),mp.inodeTree.Len())
 }
 
 func (mp *metaPartition) syncToRaftFollowersFreeInode(hasDeleteInodes []byte) (err error) {
